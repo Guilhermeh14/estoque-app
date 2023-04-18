@@ -1,4 +1,4 @@
-export class ClientesService {
+export class Cliente {
     id?: number;
     nome: string | undefined;
     email: string | undefined;

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Cliente } from '../models/cliente.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +11,17 @@ export class ClientesService {
 
   constructor(private http: HttpClient) { }
 
-  create (){}
+  create (cliente: Cliente){}
 
-  getAll (){}
+  getAll (){
+    return this.http.get<Cliente[]>(this.url);
+  }
 
-  getOne (){}
+  getOne (id: number){}
 
-  update (){}
+  update (id: number, cliente: Cliente){}
 
-  delete (){}
+  delete (cliente: Cliente){}
 
   login (){}
 
