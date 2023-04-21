@@ -1,3 +1,4 @@
+import { Observable, map, catchError, EMPTY } from 'rxjs';
 import { Produto } from './../models/produto.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -13,8 +14,11 @@ export class ProdutosService {
 
   create() { }
 
-  getAll() {
-    return this.http.get<Produto[]>(this.url);
+  getAll(): Observable<Produto[]> {
+    return this.http.get<Produto[]>(this.url).pipe(
+      map(retorno => retorno),
+      catchError(erro => this.exibirErro(erro))
+    );
   }
 
   getOne() { }
@@ -22,4 +26,15 @@ export class ProdutosService {
   update() { }
 
   delete() { }
+
+  exibirErro(erro: any): Observable<any>{
+    if (erro['status'] == 404) {
+      alert(`ERROR 404\n\nEndereço ${erro['url']} não encontrado!`)
+    } else {
+      alert('Deu erro')
+    }
+    console.log(erro);
+
+    return EMPTY
+  }
 }
