@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cliente } from '../models/cliente.model';
 import { catchError, EMPTY, map, Observable } from 'rxjs';
-import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
 @Injectable({
@@ -14,9 +13,13 @@ export class ClientesService {
   constructor(
     private http: HttpClient,
     private alertController: AlertController
-  ) {}
+  ) { }
 
-  create(cliente: Cliente) {}
+  create(cliente: Cliente): Observable<Cliente> {
+    return this.http.post<Cliente>(this.url, cliente).pipe(
+      map((retorno) => retorno),
+      catchError((erro) => this.exibirErro(erro)));
+  }
 
   getAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.url).pipe(
@@ -25,15 +28,19 @@ export class ClientesService {
     );
   }
 
-  getOne(id: number) {}
+  getOne(id: number): Observable<Cliente> {
+    return this.http.get<Cliente>(`${this.url}/${id}`);
+  }
 
-  update(id: number, cliente: Cliente) {}
+  update(id: number, cliente: Cliente) { }
 
-  delete(cliente: Cliente) {}
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 
-  login() {}
+  login() { }
 
-  logout() {}
+  logout() { }
 
   exibirErro(erro: any): Observable<any> {
     const titulo = 'Erro na Conexão';
