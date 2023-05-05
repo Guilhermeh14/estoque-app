@@ -1,7 +1,7 @@
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ViewWillEnter } from '@ionic/angular';
 import { Cliente } from '../models/cliente.model';
 import { ClientesService } from '../services/clientes.service';
 
@@ -12,13 +12,13 @@ import { ClientesService } from '../services/clientes.service';
   standalone: true,
   imports: [IonicModule, CommonModule, RouterLink],
 })
-export class HomePage implements OnInit{
+export class HomePage implements ViewWillEnter{
 
   listaClientes: Cliente[] = [];
 
   constructor(private clientesService: ClientesService, private route: Router) {}
 
-  ngOnInit() {
+  ionViewWillEnter(): void {
     this.buscarClientes();
   }
 
@@ -34,7 +34,7 @@ export class HomePage implements OnInit{
 
   excluirCliente(id: number) {
     if (confirm("Deseja excluir?")) {
-      this.clientesService.delete(id).subscribe(() => location.reload());
+      this.clientesService.delete(id).subscribe(() => this.buscarClientes());
     }
   }
 }
