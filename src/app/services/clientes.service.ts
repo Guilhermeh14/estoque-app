@@ -18,7 +18,8 @@ export class ClientesService {
   create(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.url, cliente).pipe(
       map((retorno) => retorno),
-      catchError((erro) => this.exibirErro(erro)));
+      catchError((erro) => this.exibirErro(erro))
+    );
   }
 
   getAll(): Observable<Cliente[]> {
@@ -29,13 +30,24 @@ export class ClientesService {
   }
 
   getOne(id: number): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.url}/${id}`);
+    return this.http.get<Cliente>(`${this.url}/${id}`).pipe(
+      map((retorno) => retorno),
+      catchError((erro) => this.exibirErro(erro))
+    );
   }
 
-  update(id: number, cliente: Cliente) { }
+  update(id: number, cliente: Cliente): Observable<Cliente> {
+    return this.http.put<Cliente>(`${this.url}/${id}`, cliente).pipe(
+      map((retorno) => retorno),
+      catchError((erro) => this.exibirErro(erro))
+    );
+  }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`).pipe(
+      map((retorno) => retorno),
+      catchError((erro) => this.exibirErro(erro))
+    );
   }
 
   login() { }
