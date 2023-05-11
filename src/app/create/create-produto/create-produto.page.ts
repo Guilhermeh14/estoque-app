@@ -27,7 +27,7 @@ export class CreateProdutoPage {
 
   salvar() {
     if ((this.titulo, this.descricao, String(this.preco), this.imagem) == '') {
-      alert('Não foi possível cadastrar. Insira as informações necessárias!');
+      alert('Insira as informações corretamente!');
     } else {
       const produto: Produto = {
         titulo: this.titulo,

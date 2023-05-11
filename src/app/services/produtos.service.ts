@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProdutosService {
 
-  url = 'http://localhost:3000/produtos';
+  url = 'https://servicodados.ibge.gov.br/api/v1/produtos/estatisticas';
 
   constructor(private http: HttpClient) { }
 
@@ -48,7 +48,7 @@ export class ProdutosService {
     if (erro['status'] == 404) {
       alert(`ERROR 404\n\nEndereço ${erro['url']} não encontrado!`)
     } else {
-      alert('Deu erro')
+      alert('erro')
     }
     console.log(erro);
 

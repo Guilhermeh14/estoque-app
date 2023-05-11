@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Produtos</ion-title>
+    <ion-title>Lista de Produtos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,7 @@
       <h1>R$ {{produto.preco}}</h1>
     </ion-label>
 
-    <ion-button color="warning" (click)="editarProduto(produto.id)">
+    <ion-button (click)="editarProduto(produto.id)">
       <ion-icon slot="icon-only" name="create-outline"></ion-icon>
     </ion-button>
 

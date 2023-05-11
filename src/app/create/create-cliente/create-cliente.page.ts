@@ -23,7 +23,7 @@ export class CreateClientePage {
 
   salvar() {
     if ((this.nome, this.email, this.senha, this.confirmarSenha) == '') {
-      alert('Não foi possível salvar, insira os dados corretamente!');
+      alert('insira os dados corretamente!');
     } else if (this.senha == this.confirmarSenha) {
       const cliente: Cliente = {
         nome: this.nome,
